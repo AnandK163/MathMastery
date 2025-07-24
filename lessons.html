@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons - MathLearn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- The store must be loaded first so it's available to other scripts -->
+    <script src="js/store.js"></script>
+    <!-- Navigation script handles updating the points display at the top -->
+    <script src="js/navigation.js"></script>
+</head>
+<body class="min-h-screen bg-background">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        Math<span class="text-accent">Learn</span>
+                    </a>
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="lessons.html" class="nav-link active">Lessons</a>
+                        <a href="quizzes.html" class="nav-link">Quizzes</a>
+                        <a href="games.html" class="nav-link">Games</a>
+                        <a href="applications.html" class="nav-link">Applications</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="points-display">
+                        <span class="text-sm text-muted-foreground">Points:</span>
+                        <!-- This 'nav-points' span is automatically updated by js/navigation.js whenever points are awarded -->
+                        <span id="nav-points" class="font-bold text-primary">0</span>
+                    </div>
+                    <button id="mobile-menu-btn" class="md:hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="space-y-2">
+                    <a href="index.html" class="mobile-nav-link">Home</a>
+                    <a href="lessons.html" class="mobile-nav-link active">Lessons</a>
+                    <a href="quizzes.html" class="mobile-nav-link">Quizzes</a>
+                    <a href="games.html" class="mobile-nav-link">Games</a>
+                    <a href="applications.html" class="mobile-nav-link">Applications</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Math <span class="text-transparent bg-clip-text bg-gradient-primary">Lessons</span>
+            </h1>
+            <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Choose your class and start learning with our interactive video lessons
+            </p>
+        </div>
+
+        <!-- Navigation Breadcrumb -->
+        <div id="breadcrumb" class="mb-8 hidden">
+            <button id="back-btn" class="btn btn-outline mb-4">
+                ← Back
+            </button>
+            <div class="text-sm text-muted-foreground" id="breadcrumb-text">
+                Lessons
+            </div>
+        </div>
+
+        <!-- Class Selection -->
+        <div id="class-selection" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Classes will be populated by JavaScript -->
+        </div>
+
+        <!-- Chapter Selection -->
+        <div id="chapter-selection" class="hidden">
+            <h2 id="chapter-title" class="text-2xl font-bold mb-8"></h2>
+            <!-- 
+                POINTS DISPLAY: This is where the magic happens!
+                The 'lessons.js' script will read the 'points' value from 'lessons-data.js'
+                and dynamically create chapter cards inside 'chapters-grid'.
+                Each card will clearly display the points you can earn (e.g., "+10 PTS").
+            -->
+            <div id="chapters-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Chapters (with points) will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Video Player -->
+        <div id="video-player" class="hidden animate-slide-up">
+            <!-- 
+                POINTS AWARDING:
+                When a user clicks a chapter, the 'lessons.js' script is triggered.
+                It calls the 'markLessonAsComplete' function in 'store.js'.
+                If it's the user's first time watching, points are awarded, and the total in the navigation bar updates.
+            -->
+            <button id="back-to-chapters" class="btn btn-outline mb-6">
+                ← Back to Chapters
+            </button>
+            
+            <div class="card mb-8">
+                <div class="card-header">
+                    <h2 id="video-title" class="text-2xl font-bold"></h2>
+                    <p id="video-description" class="text-lg text-muted-foreground"></p>
+                </div>
+                <div class="card-content">
+                    <div class="aspect-video mb-6">
+                        <iframe id="video-frame" class="w-full h-full rounded-lg" allowfullscreen></iframe>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold">Topics Covered:</h3>
+                        <div id="video-topics" class="flex flex-wrap gap-2">
+                            <!-- Topics will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions for updating content -->
+        <div class="mt-16 p-6 bg-muted/50 rounded-lg border border-dashed border-border">
+            <h3 class="text-lg font-semibold mb-2">📝 Update Instructions</h3>
+            <p class="text-muted-foreground text-sm">
+                To update video content or points: Edit the <code>chapterData</code> object in <code>data/lessons-data.js</code>. 
+                Replace placeholder YouTube URLs and adjust the <code>points</code> value for each chapter.
+            </p>
+        </div>
+    </main>
+
+    <!-- The main logic script, loaded as a module -->
+    <script type="module" src="js/lessons.js"></script>
+</body>
+</html>

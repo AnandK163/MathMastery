@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Games - MathLearn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/store.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+<body class="min-h-screen bg-background">
+    <!-- Navigation (No changes needed here) -->
+    <nav class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        Math<span class="text-accent">Learn</span>
+                    </a>
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="lessons.html" class="nav-link">Lessons</a>
+                        <a href="quizzes.html" class="nav-link">Quizzes</a>
+                        <a href="games.html" class="nav-link active">Games</a>
+                        <a href="applications.html" class="nav-link">Applications</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="points-display">
+                        <span class="text-sm text-muted-foreground">Points:</span>
+                        <span id="nav-points" class="font-bold text-primary">0</span>
+                    </div>
+                    <button id="mobile-menu-btn" class="md:hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="space-y-2">
+                    <a href="index.html" class="mobile-nav-link">Home</a>
+                    <a href="lessons.html" class="mobile-nav-link">Lessons</a>
+                    <a href="quizzes.html" class="mobile-nav-link">Quizzes</a>
+                    <a href="games.html" class="mobile-nav-link active">Games</a>
+                    <a href="applications.html" class="mobile-nav-link">Applications</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Interactive <span class="text-transparent bg-clip-text bg-gradient-accent">Games</span>
+            </h1>
+            <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Sharpen your skills and have fun with these math-based games
+            </p>
+        </div>
+
+        
+        <!-- Game Selection -->
+        <div id="game-selection" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Games will be populated by JavaScript -->
+        </div>
+
+        <!-- Game Player -->
+        <div id="game-player" class="hidden">
+            <button id="back-to-games" class="btn btn-outline mb-6">
+                ← Back to Games
+            </button>
+            <div id="game-content">
+                <!-- Game content will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Instructions for adding new games (Updated) -->
+        <div class="mt-16 p-6 bg-muted/50 rounded-lg border border-dashed border-border">
+            <h3 class="text-lg font-semibold mb-2">🎮 How to Add New Games</h3>
+            <ol class="list-decimal list-inside text-muted-foreground text-sm space-y-2">
+                <li>Create a new logic file in <code>js/games/</code> (e.g., <code>new-game.js</code>). It must export an object with <code>render</code> and <code>init</code> methods.</li>
+                <li>Add the game's metadata (title, description, etc.) to the <code>games</code> array in <code>data/games-data.js</code>.</li>
+                <li>In <code>js/games.js</code>, import your new game module and add it to the <code>gameModules</code> map.</li>
+            </ol>
+        </div>
+    </main>
+
+    <script type="module" src="js/games.js"></script>
+</body>
+</html>

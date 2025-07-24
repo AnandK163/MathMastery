@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLearn - Interactive Math Education for Grades 6-10</title>
+    <meta name="description" content="Learn mathematics through interactive lessons, quizzes, games, and real-life applications. Designed for students in grades 6-10.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/store.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+<body class="min-h-screen bg-background">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        Math<span class="text-accent">Learn</span>
+                    </a>
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="index.html" class="nav-link active">Home</a>
+                        <a href="lessons.html" class="nav-link">Lessons</a>
+                        <a href="quizzes.html" class="nav-link">Quizzes</a>
+                        <a href="games.html" class="nav-link">Games</a>
+                        <a href="applications.html" class="nav-link">Applications</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="points-display">
+                        <span class="text-sm text-muted-foreground">Points:</span>
+                        <span id="nav-points" class="font-bold text-primary">0</span>
+                    </div>
+                    <button id="mobile-menu-btn" class="md:hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="space-y-2">
+                    <a href="index.html" class="mobile-nav-link active">Home</a>
+                    <a href="lessons.html" class="mobile-nav-link">Lessons</a>
+                    <a href="quizzes.html" class="mobile-nav-link">Quizzes</a>
+                    <a href="games.html" class="mobile-nav-link">Games</a>
+                    <a href="applications.html" class="mobile-nav-link">Applications</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="relative py-20 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-hero opacity-10"></div>
+            <div class="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
+                <div class="animate-bounce-in">
+                    <h1 class="text-4xl md:text-6xl font-bold text-foreground mb-6">
+                        Learn Math the 
+                        <span class="text-transparent bg-clip-text bg-gradient-hero">Fun Way</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+                        Interactive lessons, engaging quizzes, and exciting games designed for students in grades 6-10
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="lessons.html">
+                            <button class="btn btn-hero min-w-48">Start Learning</button>
+                        </a>
+                        <a href="games.html">
+                            <button class="btn btn-outline min-w-48">Play Games</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Continue with rest of content... -->
+        <script src="js/home.js"></script>
+    </main>
+</body>
+</html>

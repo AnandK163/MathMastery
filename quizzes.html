@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes - MathLearn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/store.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+<body class="min-h-screen bg-background">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        Math<span class="text-accent">Learn</span>
+                    </a>
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="lessons.html" class="nav-link">Lessons</a>
+                        <a href="quizzes.html" class="nav-link active">Quizzes</a>
+                        <a href="games.html" class="nav-link">Games</a>
+                        <a href="applications.html" class="nav-link">Applications</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="points-display">
+                        <span class="text-sm text-muted-foreground">Points:</span>
+                        <span id="nav-points" class="font-bold text-primary">0</span>
+                    </div>
+                    <button id="mobile-menu-btn" class="md:hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="space-y-2">
+                    <a href="index.html" class="mobile-nav-link">Home</a>
+                    <a href="lessons.html" class="mobile-nav-link">Lessons</a>
+                    <a href="quizzes.html" class="mobile-nav-link active">Quizzes</a>
+                    <a href="games.html" class="mobile-nav-link">Games</a>
+                    <a href="applications.html" class="mobile-nav-link">Applications</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Math <span class="text-transparent bg-clip-text bg-gradient-secondary">Quizzes</span>
+            </h1>
+            <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Test your knowledge with interactive quizzes based on Telangana SSC curriculum
+            </p>
+        </div>
+
+        <!-- Navigation Breadcrumb -->
+        <div id="breadcrumb" class="mb-8 hidden">
+            <button id="back-btn" class="btn btn-outline mb-4">
+                ← Back
+            </button>
+            <div class="text-sm text-muted-foreground" id="breadcrumb-text">
+                Quizzes
+            </div>
+        </div>
+
+        <!-- Class Selection -->
+        <div id="class-selection" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Classes will be populated by JavaScript -->
+        </div>
+
+        <!-- Chapter Selection -->
+        <div id="chapter-selection" class="hidden">
+            <h2 id="chapter-title" class="text-2xl font-bold mb-8"></h2>
+            <div id="chapters-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Chapters will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Quiz Player -->
+        <div id="quiz-player" class="hidden">
+            <button id="back-to-chapters" class="btn btn-outline mb-6">
+                ← Back to Chapters
+            </button>
+            
+            <!-- Quiz Header -->
+            <div class="card mb-6">
+                <div class="card-header">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h2 id="quiz-title" class="text-2xl font-bold"></h2>
+                            <p id="quiz-description" class="text-muted-foreground"></p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm text-muted-foreground">Progress</div>
+                            <div id="quiz-progress" class="text-lg font-bold">1 / 5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quiz Content -->
+            <div id="quiz-content">
+                <!-- Quiz questions will be populated by JavaScript -->
+            </div>
+            
+            <!-- Quiz Results -->
+            <div id="quiz-results" class="hidden">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h2 class="text-3xl font-bold mb-4">Quiz Complete!</h2>
+                        <div id="score-display" class="text-6xl font-bold text-primary mb-4">0/5</div>
+                        <div id="percentage-display" class="text-xl text-muted-foreground mb-4">0%</div>
+                        <div id="points-earned" class="text-lg font-semibold text-warning">+0 points earned</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="space-y-4">
+                            <button id="review-answers" class="btn btn-outline w-full">Review Answers</button>
+                            <button id="retake-quiz" class="btn btn-primary w-full">Retake Quiz</button>
+                            <button id="back-to-quizzes" class="btn btn-secondary w-full">Back to Quizzes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions for updating content -->
+        <div class="mt-16 p-6 bg-muted/50 rounded-lg border border-dashed border-border">
+            <h3 class="text-lg font-semibold mb-2">📝 Update Instructions</h3>
+            <p class="text-muted-foreground text-sm space-y-2">
+                To update quiz content, add or edit the quiz files in the <code>data/quizzes/</code> directory.
+                Then, update the <code>data/quizzes/index.js</code> file to include any new quiz data.
+            </p>
+        </div>
+    </main>
+
+    <script type="module" src="js/quiz.js"></script>
+</body>
+</html>
