@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathLearn - Interactive Math Education for Grades 6-10</title>
-    <meta name="description" content="Learn mathematics through interactive lessons, quizzes, games, and real-life applications. Designed for students in grades 6-10.">
+
+    <meta name="google-site-verification" content="f35y3uGxsNgOx8TIkM7EYMiVu2DlhyAAaSIZAjYi7b4" />
+
+    <title>MathsMastery – Learn School-Level Mathematics</title>
+    <meta name="description" content="Explore interactive math concepts, applications, and problem-solving tips for students in grades 6 to 10.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/store.js"></script>
-    <script src="js/navigation.js"></script>
+    <!-- Navigation script needs to be loaded at the end of the body -->
 </head>
-<body class="min-h-screen bg-background">
+<body class="min-h-screen bg-background text-foreground">
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <nav class="sticky top-0 z-30 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center space-x-8">
-                    <a href="index.html" class="text-2xl font-bold text-primary">
-                        Math<span class="text-accent">Learn</span>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-3xl font-black">
+                        <span class="text-gradient-lessons">Math</span><span class="text-gradient-games">Learn</span>
                     </a>
-                    <div class="hidden md:flex items-center space-x-6">
+                    <div class="hidden md:flex items-center space-x-1">
                         <a href="index.html" class="nav-link active">Home</a>
                         <a href="lessons.html" class="nav-link">Lessons</a>
                         <a href="quizzes.html" class="nav-link">Quizzes</a>
@@ -28,58 +31,181 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <div class="points-display">
-                        <span class="text-sm text-muted-foreground">Points:</span>
-                        <span id="nav-points" class="font-bold text-primary">0</span>
+                    <div class="points-display flex items-center gap-2 bg-secondary py-1 px-3 rounded-full text-sm">
+                        <span class="text-yellow-500 text-lg">🌟</span>
+                        <span id="nav-points" class="font-bold text-secondary-foreground">0</span>
                     </div>
-                    <button id="mobile-menu-btn" class="md:hidden">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md text-foreground hover:bg-secondary">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m4 6H4"></path></svg>
                     </button>
-                </div>
-            </div>
-            <!-- Mobile menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <div class="space-y-2">
-                    <a href="index.html" class="mobile-nav-link active">Home</a>
-                    <a href="lessons.html" class="mobile-nav-link">Lessons</a>
-                    <a href="quizzes.html" class="mobile-nav-link">Quizzes</a>
-                    <a href="games.html" class="mobile-nav-link">Games</a>
-                    <a href="applications.html" class="mobile-nav-link">Applications</a>
                 </div>
             </div>
         </div>
     </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay"></div>
+    
+    <!-- Mobile Menu - The new horizontal bar at the bottom -->
+    <div id="mobile-menu">
+        <a href="index.html" class="mobile-nav-link active"><span class="icon">🏠</span><span>Home</span></a>
+        <a href="lessons.html" class="mobile-nav-link"><span class="icon">📚</span><span>Lessons</span></a>
+        <a href="quizzes.html" class="mobile-nav-link"><span class="icon">🧠</span><span>Quizzes</span></a>
+        <a href="games.html" class="mobile-nav-link"><span class="icon">🎮</span><span>Games</span></a>
+        <a href="applications.html" class="mobile-nav-link"><span class="icon">💡</span><span>Applications</span></a>
+    </div>
 
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="relative py-20 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-hero opacity-10"></div>
-            <div class="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
-                <div class="animate-bounce-in">
-                    <h1 class="text-4xl md:text-6xl font-bold text-foreground mb-6">
-                        Learn Math the 
-                        <span class="text-transparent bg-clip-text bg-gradient-hero">Fun Way</span>
-                    </h1>
-                    <p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-                        Interactive lessons, engaging quizzes, and exciting games designed for students in grades 6-10
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="lessons.html">
-                            <button class="btn btn-hero min-w-48">Start Learning</button>
-                        </a>
-                        <a href="games.html">
-                            <button class="btn btn-outline min-w-48">Play Games</button>
-                        </a>
+        <section class="relative py-20 md:py-28 overflow-hidden">
+            <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%239C92AC%22 fill-opacity=%220.12%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            <div class="relative max-w-7xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center">
+                <div class="text-center md:text-left animate-slide-up">
+                    <h1 class="text-5xl md:text-7xl font-black text-foreground mb-4 leading-tight">Your Math Adventure Awaits!</h1>
+                    <p class="text-xl text-muted-foreground mb-10 max-w-xl mx-auto md:mx-0">Solve puzzles, conquer quizzes, and master math in a world built just for you. Ready to play?</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="lessons.html" class="btn btn-primary btn-lg">🚀 Let's Go!</a>
+                        <a href="games.html" class="btn btn-secondary btn-lg">Play a Game</a>
+                    </div>
+                </div>
+                <div class="relative h-80 md:h-96 flex items-center justify-center">
+                    <img src="images/Student studying.png" alt="A friendly character studying math" class="w-full max-w-sm md:max-w-md animate-float z-10 mt-6">
+                </div>
+            </div>
+        </section>
+
+        <!-- What's Inside Section -->
+        <section class="py-20 md:py-24 bg-card border-y">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-black text-foreground">What's Inside?</h2>
+                    <p class="text-lg text-muted-foreground mt-3">A world of fun waiting to be explored!</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature Card 1: Lessons -->
+                    <a href="lessons.html" class="card text-center animate-pop-in">
+                        <div class="mx-auto w-24 h-24 mb-6 flex items-center justify-center rounded-full bg-gradient-lessons text-white text-5xl">📚</div>
+                        <h3 class="text-2xl font-bold mb-2 text-gradient-lessons">Lessons</h3>
+                        <p class="text-muted-foreground">Watch videos and read notes to become a math master.</p>
+                    </a>
+                    <!-- Feature Card 2: Quizzes -->
+                    <a href="quizzes.html" class="card text-center animate-pop-in" style="animation-delay: 150ms;">
+                        <div class="mx-auto w-24 h-24 mb-6 flex items-center justify-center rounded-full bg-gradient-quizzes text-white text-5xl">🧠</div>
+                        <h3 class="text-2xl font-bold mb-2 text-gradient-quizzes">Quizzes</h3>
+                        <p class="text-muted-foreground">Test your skills and earn awesome points and badges.</p>
+                    </a>
+                    <!-- Feature Card 3: Games -->
+                    <a href="games.html" class="card text-center animate-pop-in" style="animation-delay: 300ms;">
+                        <div class="mx-auto w-24 h-24 mb-6 flex items-center justify-center rounded-full bg-gradient-games text-white text-5xl">🎮</div>
+                        <h3 class="text-2xl font-bold mb-2 text-gradient-games">Games</h3>
+                        <p class="text-muted-foreground">Practice is fun when you're playing cool math games!</p>
+                    </a>
+                    <!-- Feature Card 4: Applications -->
+                    <a href="applications.html" class="card text-center animate-pop-in" style="animation-delay: 450ms;">
+                        <div class="mx-auto w-24 h-24 mb-6 flex items-center justify-center rounded-full bg-gradient-apps text-white text-5xl">💡</div>
+                        <h3 class="text-2xl font-bold mb-2 text-gradient-apps">Applications</h3>
+                        <p class="text-muted-foreground">See how math is used in the real world every day.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Your Adventure So Far Section -->
+        <section id="dashboard" class="py-20 md:py-24">
+             <div class="max-w-4xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-black text-foreground">Your Player Dashboard</h2>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8 items-start">
+                    <div class="card">
+                        <h3 class="text-2xl font-bold mb-4">Your Stats</h3>
+                        <div id="stats-grid" class="grid grid-cols-2 gap-6">
+                            <!-- Stats will be populated by home.js -->
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-2xl font-bold mb-4">Badge Collection</h3>
+                        <div id="badges-container" class="bg-secondary p-4 rounded-lg min-h-[150px]">
+                            <!-- Badges will be populated by home.js -->
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Continue with rest of content... -->
-        <script src="js/home.js"></script>
     </main>
+
+    <!-- =================================================================== -->
+    <!--                       START: IMPRESSIVE FOOTER                        -->
+    <!-- =================================================================== -->
+    <footer class="site-footer">
+        <!-- Fun Wavy Shape Separator -->
+        <div class="footer-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+            <div class="footer-grid">
+                <!-- Column 1: Brand and Motto -->
+                <div class="footer-column">
+                    <a href="index.html" class="text-3xl font-black">
+                        <span class="text-gradient-lessons">Math</span><span class="text-gradient-games">Learn</span>
+                    </a>
+                    <p class="mt-4 text-muted-foreground">Making math a fun and exciting adventure for everyone!</p>
+                </div>
+
+                <!-- Column 2: Explore Links -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="lessons.html">Lessons</a></li>
+                        <li><a href="quizzes.html">Quizzes</a></li>
+                        <li><a href="games.html">Games</a></li>
+                        <li><a href="applications.html">Applications</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Support Links -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Legal Links -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar: Copyright and Social Icons -->
+            <div class="footer-bottom-bar">
+                <p class="text-sm text-muted-foreground">© 2024 MathLearn. All Rights Reserved.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Twitter"><svg><!-- ... twitter icon ... --></svg></a>
+                    <a href="#" aria-label="YouTube"><svg><!-- ... youtube icon ... --></svg></a>
+                    <a href="#" aria-label="Instagram"><svg><!-- ... instagram icon ... --></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- =================================================================== -->
+    <!--                         END: IMPRESSIVE FOOTER                        -->
+    <!-- =================================================================== -->
+
+
+    <script src="js/navigation.js"></script>
+    <script src="js/home.js"></script>
+
 </body>
 </html>

@@ -9,16 +9,16 @@
     <script src="js/store.js"></script>
     <script src="js/navigation.js"></script>
 </head>
-<body class="min-h-screen bg-background">
+<body class="min-h-screen bg-background text-foreground">
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <nav class="sticky top-0 z-30 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center space-x-8">
-                    <a href="index.html" class="text-2xl font-bold text-primary">
-                        Math<span class="text-accent">Learn</span>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-3xl font-black">
+                        <span class="text-gradient-lessons">Math</span><span class="text-gradient-games">Learn</span>
                     </a>
-                    <div class="hidden md:flex items-center space-x-6">
+                    <div class="hidden md:flex items-center space-x-1">
                         <a href="index.html" class="nav-link">Home</a>
                         <a href="lessons.html" class="nav-link">Lessons</a>
                         <a href="quizzes.html" class="nav-link">Quizzes</a>
@@ -27,36 +27,36 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <div class="points-display">
-                        <span class="text-sm text-muted-foreground">Points:</span>
-                        <span id="nav-points" class="font-bold text-primary">0</span>
+                    <div class="points-display flex items-center gap-2 bg-secondary py-1 px-3 rounded-full text-sm">
+                        <span class="text-yellow-500 text-lg">🌟</span>
+                        <span id="nav-points" class="font-bold text-secondary-foreground">0</span>
                     </div>
-                    <button id="mobile-menu-btn" class="md:hidden">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md text-foreground hover:bg-secondary">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m4 6H4"></path></svg>
                     </button>
-                </div>
-            </div>
-            <!-- Mobile menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <div class="space-y-2">
-                    <a href="index.html" class="mobile-nav-link">Home</a>
-                    <a href="lessons.html" class="mobile-nav-link">Lessons</a>
-                    <a href="quizzes.html" class="mobile-nav-link">Quizzes</a>
-                    <a href="games.html" class="mobile-nav-link">Games</a>
-                    <a href="applications.html" class="mobile-nav-link active">Applications</a>
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay"></div>
+    
+    <!-- Mobile Menu - The new horizontal bar at the bottom -->
+    <div id="mobile-menu">
+        <a href="index.html" class="mobile-nav-link"><span class="icon">🏠</span><span>Home</span></a>
+        <a href="lessons.html" class="mobile-nav-link"><span class="icon">📚</span><span>Lessons</span></a>
+        <a href="quizzes.html" class="mobile-nav-link"><span class="icon">🧠</span><span>Quizzes</span></a>
+        <a href="games.html" class="mobile-nav-link"><span class="icon">🎮</span><span>Games</span></a>
+        <a href="applications.html" class="mobile-nav-link active"><span class="icon">💡</span><span>Applications</span></a>
+    </div>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         <!-- Header -->
         <div class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Real-Life <span class="text-transparent bg-clip-text bg-gradient-hero">Applications</span>
+                Real-Life <span class="text-gradient-apps">Applications</span>
             </h1>
             <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
                 Discover how mathematics applies to everyday situations and solve real-world problems
@@ -74,14 +74,82 @@
         </div>
 
         <!-- Instructions for adding new applications -->
-        <div class="mt-16 p-6 bg-muted/50 rounded-lg border border-dashed border-border">
+        <!-- <div class="mt-16 p-6 bg-muted/50 rounded-lg border border-dashed border-border">
             <h3 class="text-lg font-semibold mb-2">🏗️ Add New Applications</h3>
             <p class="text-muted-foreground text-sm space-y-2">
                 To add new real-life applications, edit the <code>applications</code> and <code>applicationCategories</code> exports in 
                 <code>data/applications-data.js</code>.
             </p>
-        </div>
+        </div> -->
     </main>
+
+    <!-- =================================================================== -->
+    <!--                       START: IMPRESSIVE FOOTER                        -->
+    <!-- =================================================================== -->
+    <footer class="site-footer">
+        <!-- Fun Wavy Shape Separator -->
+        <div class="footer-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+            <div class="footer-grid">
+                <!-- Column 1: Brand and Motto -->
+                <div class="footer-column">
+                    <a href="index.html" class="text-3xl font-black">
+                        <span class="text-gradient-lessons">Math</span><span class="text-gradient-games">Learn</span>
+                    </a>
+                    <p class="mt-4 text-muted-foreground">Making math a fun and exciting adventure for everyone!</p>
+                </div>
+
+                <!-- Column 2: Explore Links -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="lessons.html">Lessons</a></li>
+                        <li><a href="quizzes.html">Quizzes</a></li>
+                        <li><a href="games.html">Games</a></li>
+                        <li><a href="applications.html">Applications</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Support Links -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Legal Links -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar: Copyright and Social Icons -->
+            <div class="footer-bottom-bar">
+                <p class="text-sm text-muted-foreground">© 2024 MathLearn. All Rights Reserved.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Twitter"><svg><!-- ... twitter icon ... --></svg></a>
+                    <a href="#" aria-label="YouTube"><svg><!-- ... youtube icon ... --></svg></a>
+                    <a href="#" aria-label="Instagram"><svg><!-- ... instagram icon ... --></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- =================================================================== -->
+    <!--                         END: IMPRESSIVE FOOTER                        -->
+    <!-- =================================================================== -->
+
 
     <script type="module" src="js/applications.js"></script>
 </body>

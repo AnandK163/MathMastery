@@ -6,6 +6,15 @@
 export const classData = [
     // ... (Class 6, 7, 8, 10 data remains unchanged)
     {
+        classNumber: 10,
+        title: "Class 10 Mathematics",
+        description: "Preparing for advanced mathematics",
+        chaptersCount: 15,
+        lessonsCount: 60,
+        difficulty: "Hard",
+        isComingSoon: false
+    },
+    {
         classNumber: 9,
         title: "Class 9 Mathematics",
         description: "Preparing for advanced mathematics",
@@ -13,6 +22,42 @@ export const classData = [
         lessonsCount: 60,
         difficulty: "Medium",
         isComingSoon: false
+    },
+    {
+        classNumber: 8,
+        title: "Class 8 Mathematics",
+        description: "Preparing for advanced mathematics",
+        chaptersCount: 15,
+        lessonsCount: 60,
+        difficulty: "Medium",
+        isComingSoon: false
+    },
+    {
+        classNumber: 7,
+        title: "NMMS",
+        description: "Preparing for advanced mathematics",
+        chaptersCount: 15,
+        lessonsCount: 60,
+        difficulty: "Medium",
+        isComingSoon: true
+    },
+    {
+        classNumber: 7,
+        title: "Class 7 Mathematics",
+        description: "Preparing for advanced mathematics",
+        chaptersCount: 15,
+        lessonsCount: 60,
+        difficulty: "Medium",
+        isComingSoon: true
+    },
+    {
+        classNumber: 6,
+        title: "Class 6 Mathematics",
+        description: "Preparing for advanced mathematics",
+        chaptersCount: 15,
+        lessonsCount: 60,
+        difficulty: "Hard",
+        isComingSoon: true
     },
     // ...
 ];
