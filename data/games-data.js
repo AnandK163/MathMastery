@@ -7,7 +7,8 @@ export const games = [
         description: 'Solve arithmetic problems as fast as you can!',
         icon: '⚡',
         difficulty: 'Easy',
-        category: 'Arithmetic'
+        category: 'Arithmetic',
+        requiredPoints: 0
     },
     {
         id: 'equation-solver',
@@ -15,7 +16,8 @@ export const games = [
         description: 'Find the missing values in equations',
         icon: '🧩',
         difficulty: 'Medium',
-        category: 'Algebra'
+        category: 'Algebra',
+        requiredPoints: 50
     },
     {
         id: 'geometry-builder',
@@ -23,7 +25,8 @@ export const games = [
         description: 'Create shapes and learn their properties',
         icon: '📐',
         difficulty: 'Medium',
-        category: 'Geometry'
+        category: 'Geometry',
+        requiredPoints: 100
     },
     {
         id: 'fraction-match',
@@ -31,6 +34,7 @@ export const games = [
         description: 'Match equivalent fractions and decimals',
         icon: '🎯',
         difficulty: 'Easy',
-        category: 'Fractions'
+        category: 'Fractions',
+        requiredPoints: 2000
     }
 ];

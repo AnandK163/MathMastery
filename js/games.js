@@ -51,8 +51,15 @@ function renderGameSelection() {
     const difficultyColors = {
         'Easy': 'bg-green-100 text-green-800', 'Medium': 'bg-yellow-100 text-yellow-800', 'Hard': 'bg-red-100 text-red-800'
     };
-    DOMElements.gameSelection.innerHTML = games.map(game => `
-        <div class="card cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-card animate-slide-up" data-game-id="${game.id}">
+
+    const totalPoints = window.gameStore ? window.gameStore.getState().totalPoints : 0;
+
+    DOMElements.gameSelection.innerHTML = games.map(game => {
+        const isLocked = totalPoints < game.requiredPoints;
+        const pointsNeeded = game.requiredPoints - totalPoints;
+
+        return `
+        <div class="card cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-card animate-slide-up ${isLocked ? 'opacity-50 pointer-events-none' : ''}" data-game-id="${game.id}">
             <div class="card-header">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 bg-gradient-accent rounded-xl flex items-center justify-center text-white text-2xl">${game.icon}</div>
@@ -64,17 +71,27 @@ function renderGameSelection() {
             <div class="card-content">
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-sm text-muted-foreground">Category: ${game.category}</span>
+                    ${isLocked ? `<span class="text-sm text-red-500 font-semibold">${pointsNeeded} points needed</span>` : ''}
                 </div>
-                <button class="btn btn-accent w-full">🎮 Play Game</button>
+                <button class="btn btn-accent w-full" ${isLocked ? 'disabled' : ''}>🎮 ${isLocked ? 'Locked' : 'Play Game'}</button>
             </div>
         </div>
-    `).join('');
+    `;
+    }).join('');
 }
 
 function handleGameCardClick(e) {
     const card = e.target.closest('.card[data-game-id]');
     if (card) {
-        startGame(card.dataset.gameId);
+        const gameId = card.dataset.gameId;
+        const gameData = games.find(g => g.id === gameId);
+        const totalPoints = window.gameStore ? window.gameStore.getState().totalPoints : 0;
+
+        if (gameData.requiredPoints > totalPoints) {
+            alert(`You need ${gameData.requiredPoints} points to unlock this game. You currently have ${totalPoints} points.`);
+            return;
+        }
+        startGame(gameId);
     }
 }
 
