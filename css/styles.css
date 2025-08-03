@@ -147,6 +147,8 @@ body {
 .btn-lg { padding: 0.8rem 2rem; font-size: 1.1rem; }
 .btn-destructive { background-color: hsl(var(--destructive)); color: hsl(var(--destructive-foreground)); }
 .btn-destructive:hover { background-color: hsl(var(--destructive) / 0.9); }
+.btn-success { background-color: hsl(var(--success)); color: hsl(var(--primary-foreground)); }
+.btn-success:hover { background-color: hsl(var(--success) / 0.9); }
 
 
 .card {
@@ -518,4 +520,136 @@ body {
 
 /* =================================================================== */
 /*                       END: IMPRESSIVE FOOTER STYLES                 */
+/* =================================================================== */
+
+/* =================================================================== */
+/*                     START: PLACE VALUE POP GAME STYLES              */
+/* =================================================================== */
+
+.pvp-balloon {
+    width: 80px;
+    height: 80px;
+    background-color: hsl(var(--primary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.pvp-balloon:hover {
+    transform: translateY(-5px) scale(1.05);
+    background-color: hsl(var(--primary) / 0.9);
+}
+
+.pvp-pop-correct {
+    animation: pop-animation 0.3s forwards;
+}
+
+.pvp-pop-incorrect {
+    animation: incorrect-pop-animation 0.4s forwards;
+}
+
+@keyframes pop-animation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes incorrect-pop-animation {
+    0% {
+        transform: translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    25% {
+        transform: translateX(-10px) rotate(-5deg);
+        background-color: hsl(var(--destructive));
+    }
+    50% {
+        transform: translateX(10px) rotate(5deg);
+    }
+    75% {
+        transform: translateX(-5px) rotate(-2deg);
+    }
+    100% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+/* =================================================================== */
+/*                       END: PLACE VALUE POP GAME STYLES                */
+/* =================================================================== */
+
+/* =================================================================== */
+/*                     START: MULTIPLICATION GRID ATTACK GAME STYLES   */
+/* =================================================================== */
+
+.mga-grid-container {
+    display: grid;
+    border: 2px solid hsl(var(--border));
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.mga-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    font-size: 1.2rem;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
+    color: hsl(var(--foreground));
+}
+
+.mga-factor {
+    background-color: hsl(var(--secondary));
+    font-weight: bold;
+}
+
+.mga-answer-cell {
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.mga-answer-cell:hover {
+    background-color: hsl(var(--muted));
+}
+
+.mga-answer-cell.mga-active {
+    border: 2px solid hsl(var(--primary));
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.5);
+    transform: scale(1.02);
+}
+
+.mga-answer-cell.mga-correct {
+    background-color: hsl(var(--success) / 0.2);
+    color: hsl(var(--success));
+    font-weight: bold;
+}
+
+.mga-answer-cell.mga-incorrect {
+    background-color: hsl(var(--destructive) / 0.2);
+    color: hsl(var(--destructive));
+    font-weight: bold;
+}
+
+/* =================================================================== */
+/*                       END: MULTIPLICATION GRID ATTACK GAME STYLES   */
 /* =================================================================== */

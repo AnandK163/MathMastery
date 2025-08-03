@@ -7,13 +7,19 @@ import { arithmeticSpeedGame } from './games/arithmetic-speed.js';
 import { equationSolverGame } from './games/equation-solver.js';
 import { geometryBuilderGame } from './games/geometry-builder.js';
 import { fractionMatchGame } from './games/fraction-match.js';
+import { placeValuePopGame } from './games/place-value-pop.js';
+import { graphDetectiveGame } from './games/graph-detective.js';
+import { multiplicationGridAttackGame } from './games/multiplication-grid-attack.js';
 
 // A map to link game IDs from data to their logic modules
 const gameModules = {
     'arithmetic-speed': arithmeticSpeedGame,
     'equation-solver': equationSolverGame,
     'geometry-builder': geometryBuilderGame,
-    'fraction-match': fractionMatchGame
+    'fraction-match': fractionMatchGame,
+    'place-value-pop': placeValuePopGame,
+    'graph-detective': graphDetectiveGame,
+    'multiplication-grid-attack': multiplicationGridAttackGame
 };
 
 let currentGame = null;

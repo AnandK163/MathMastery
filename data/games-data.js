@@ -37,4 +37,32 @@ export const games = [
         category: 'Fractions',
         requiredPoints: 2000
     }
+,
+    {
+        id: 'place-value-pop',
+        title: 'Place Value Pop',
+        description: 'Pop balloons that match the given place value (ones, tens, hundreds).',
+        icon: '🎈',
+        difficulty: 'Easy',
+        category: 'Number Sense',
+        requiredPoints: 0
+    },
+    {
+        id: 'graph-detective',
+        title: 'Graph Detective',
+        description: 'Interpret bar graphs, line charts, and pie charts to answer questions.',
+        icon: '📈',
+        difficulty: 'Easy',
+        category: 'Data Interpretation',
+        requiredPoints: 0
+    },
+    {
+        id: 'multiplication-grid-attack',
+        title: 'Multiplication Grid Attack',
+        description: 'Complete multiplication tables under time pressure.',
+        icon: '✖️',
+        difficulty: 'Medium',
+        category: 'Multiplication',
+        requiredPoints: 0
+    }
 ];
