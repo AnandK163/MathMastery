@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lessons - MathLearn</title>
+    <title>Videos - MathLearn</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     <!-- The store must be loaded first so it's available to other scripts -->
@@ -22,7 +22,8 @@
                     </a>
                     <div class="hidden md:flex items-center space-x-1">
                         <a href="index.html" class="nav-link">Home</a>
-                        <a href="lessons.html" class="nav-link active">Lessons</a>
+                        <a href="videos.html" class="nav-link active">Videos</a>
+                        <a href="notes.html" class="nav-link">Notes</a>
                         <a href="quizzes.html" class="nav-link">Quizzes</a>
                         <a href="games.html" class="nav-link">Games</a>
                         <a href="applications.html" class="nav-link">Applications</a>
@@ -47,7 +48,8 @@
     <!-- Mobile Menu - The new horizontal bar at the bottom -->
     <div id="mobile-menu">
         <a href="index.html" class="mobile-nav-link"><span class="icon">🏠</span><span>Home</span></a>
-        <a href="lessons.html" class="mobile-nav-link"><span class="icon">📚</span><span>Lessons</span></a>
+        <a href="videos.html" class="mobile-nav-link"><span class="icon">▶️</span><span>Videos</span></a>
+        <a href="notes.html" class="mobile-nav-link"><span class="icon">📚</span><span>Notes</span></a>
         <a href="quizzes.html" class="mobile-nav-link"><span class="icon">🧠</span><span>Quizzes</span></a>
         <a href="games.html" class="mobile-nav-link"><span class="icon">🎮</span><span>Games</span></a>
         <a href="applications.html" class="mobile-nav-link"><span class="icon">💡</span><span>Applications</span></a>
@@ -58,7 +60,7 @@
         <!-- Header -->
         <div class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Math <span class="text-transparent bg-clip-text bg-gradient-primary">Lessons</span>
+                Math <span class="text-transparent bg-clip-text bg-gradient-primary">Videos</span>
             </h1>
             <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
                 Choose your class and start learning with our interactive video lessons
@@ -71,7 +73,7 @@
                 ← Back
             </button>
             <div class="text-sm text-muted-foreground" id="breadcrumb-text">
-                Lessons
+                Videos
             </div>
         </div>
 
@@ -85,7 +87,7 @@
             <h2 id="chapter-title" class="text-2xl font-bold mb-8"></h2>
             <!-- 
                 POINTS DISPLAY: This is where the magic happens!
-                The 'lessons.js' script will read the 'points' value from 'lessons-data.js'
+                The 'videos.js' script will read the 'points' value from 'videos-data.js'
                 and dynamically create chapter cards inside 'chapters-grid'.
                 Each card will clearly display the points you can earn (e.g., "+10 PTS").
             -->
@@ -98,7 +100,7 @@
         <div id="video-player" class="hidden animate-slide-up">
             <!-- 
                 POINTS AWARDING:
-                When a user clicks a chapter, the 'lessons.js' script is triggered.
+                When a user clicks a chapter, the 'videos.js' script is triggered.
                 It calls the 'markLessonAsComplete' function in 'store.js'.
                 If it's the user's first time watching, points are awarded, and the total in the navigation bar updates.
             -->
@@ -130,7 +132,7 @@
         <!-- <div class="mt-16 p-6 bg-muted/50 rounded-lg border border-dashed border-border">
             <h3 class="text-lg font-semibold mb-2">📝 Update Instructions</h3>
             <p class="text-muted-foreground text-sm">
-                To update video content or points: Edit the <code>chapterData</code> object in <code>data/lessons-data.js</code>. 
+                To update video content or points: Edit the <code>chapterData</code> object in <code>data/videos-data.js</code>. 
                 Replace placeholder YouTube URLs and adjust the <code>points</code> value for each chapter.
             </p>
         </div> -->
@@ -140,63 +142,16 @@
     <!--                       START: IMPRESSIVE FOOTER                        -->
     <!-- =================================================================== -->
     <footer class="site-footer">
-        <!-- Fun Wavy Shape Separator -->
-        <div class="footer-wave">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-            <div class="footer-grid">
-                <!-- Column 1: Brand and Motto -->
-                <div class="footer-column">
-                    <a href="index.html" class="text-3xl font-black">
-                        <span class="text-gradient-lessons">Math</span><span class="text-gradient-games">Learn</span>
-                    </a>
-                    <p class="mt-4 text-muted-foreground">Making math a fun and exciting adventure for everyone!</p>
-                </div>
-
-                <!-- Column 2: Explore Links -->
-                <div class="footer-column">
-                    <h3 class="footer-heading">Explore</h3>
-                    <ul class="footer-links">
-                        <li><a href="lessons.html">Lessons</a></li>
-                        <li><a href="quizzes.html">Quizzes</a></li>
-                        <li><a href="games.html">Games</a></li>
-                        <li><a href="applications.html">Applications</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: Support Links -->
-                <div class="footer-column">
-                    <h3 class="footer-heading">Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 4: Legal Links -->
-                <div class="footer-column">
-                    <h3 class="footer-heading">Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="text-gradient-lessons">Math</span><span class="text-gradient-games">Learn</span>
             </div>
-
-            <!-- Bottom Bar: Copyright and Social Icons -->
-            <div class="footer-bottom-bar">
-                <p class="text-sm text-muted-foreground">© 2024 MathLearn. All Rights Reserved.</p>
-                <div class="footer-socials">
-                    <a href="#" aria-label="Twitter"><svg><!-- ... twitter icon ... --></svg></a>
-                    <a href="#" aria-label="YouTube"><svg><!-- ... youtube icon ... --></svg></a>
-                    <a href="#" aria-label="Instagram"><svg><!-- ... instagram icon ... --></svg></a>
-                </div>
-            </div>
+            <p class="footer-motto">Your journey to mathematical mastery starts here.</p>
+            <p class="footer-contact">
+                For queries and doubts, contact us at: 
+                <a href="mailto:zphstphd@gmail.com">zphstphd@gmail.com</a>
+            </p>
+            <p class="footer-copyright">&copy; 2024 MathLearn. All Rights Reserved.</p>
         </div>
     </footer>
     <!-- =================================================================== -->
@@ -205,6 +160,6 @@
 
 
     <!-- The main logic script, loaded as a module -->
-    <script type="module" src="js/lessons.js"></script>
+    <script type="module" src="js/videos.js"></script>
 </body>
 </html>

@@ -448,133 +448,74 @@ body {
 /* =================================================================== */
 
 .site-footer {
-    background-color: hsl(var(--card-foreground));
-    color: hsl(var(--muted-foreground));
-    position: relative;
-}
-
-/* Styles for the wavy shape divider */
-/* .site-footer .footer-wave {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: translateY(-100%); /* Position it above the footer 
-}*/
-
-.site-footer .footer-wave svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 100px; /* Adjust height of the wave */
-}
-
-.site-footer .footer-wave .shape-fill {
-    fill: hsl(var(--card-foreground)); /* Match the footer's background color */
-} */
-
-/* Main grid layout for the footer links */
-.site-footer .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
-    gap: 2.5rem;
-    padding-top: 4rem; /* More space to account for the wave */
-}
-
-@media (min-width: 768px) {
-    .site-footer .footer-grid {
-        grid-template-columns: repeat(4, 1fr); /* 4 columns on larger screens */
-    }
-}
-
-/* Styling for each column in the grid */
-.site-footer .footer-column {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Styling for the footer headings like "Explore" */
-.site-footer .footer-heading {
-    font-size: 1rem;
-    font-weight: 800;
-    color: hsl(var(--foreground));
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-/* Styling for the list of links */
-.site-footer .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.site-footer .footer-links a {
-    color: hsl(var(--muted-foreground));
-    text-decoration: none;
-    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
-    display: inline-block;
-}
-
-.site-footer .footer-links a:hover {
-    color: hsl(var(--primary));
-    transform: translateX(4px);
-}
-
-/* Bottom bar for copyright and social media */
-.site-footer .footer-bottom-bar {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid hsl(var(--border) / 0.3);
-    display: flex;
-    flex-direction: column-reverse; /* Stack socials above copyright on mobile */
-    align-items: center;
-    gap: 1.5rem;
-}
-
-@media (min-width: 768px) {
-    .site-footer .footer-bottom-bar {
-        flex-direction: row; /* Side-by-side on larger screens */
-        justify-content: space-between;
-    }
-}
-
-/* Container for social media icons */
-.site-footer .footer-socials {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.site-footer .footer-socials a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color: hsl(var(--border) / 0.2);
-    border-radius: 9999px; /* Make them circular */
-    color: hsl(var(--muted-foreground));
-    transition: all 0.2s ease-in-out;
-}
-
-.site-footer .footer-socials a:hover {
-    background-color: hsl(var(--primary));
+    background: linear-gradient(135deg, hsl(var(--lessons-primary)), hsl(var(--games-primary)));
     color: hsl(var(--primary-foreground));
-    transform: scale(1.1);
+    padding: 4rem 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.site-footer .footer-socials svg {
-    width: 1.25rem;
-    height: 1.25rem;
-    fill: currentColor;
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, hsla(var(--accent), 0.1), transparent 70%);
+    animation: rotate-glow 20s linear infinite;
 }
+
+@keyframes rotate-glow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    animation: slide-up 1s ease-out;
+}
+
+.footer-logo {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.footer-logo .text-gradient-lessons,
+.footer-logo .text-gradient-games {
+    -webkit-text-fill-color: white;
+}
+
+.footer-motto {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.footer-contact a {
+    color: hsl(var(--primary-foreground));
+    text-decoration: none;
+    border-bottom: 2px solid hsla(var(--primary-foreground), 0.5);
+    transition: all 0.3s ease;
+    padding-bottom: 2px;
+}
+
+.footer-contact a:hover {
+    border-bottom-color: hsl(var(--primary-foreground));
+    text-shadow: 0 0 8px hsla(var(--primary-foreground), 0.5);
+}
+
+.footer-copyright {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
 /* =================================================================== */
 /*                       END: IMPRESSIVE FOOTER STYLES                 */
 /* =================================================================== */

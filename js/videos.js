@@ -1,8 +1,8 @@
-// js/lessons.js
+// js/videos.js
 
 // --- IMPORTS ---
 // Import the curriculum data from our dedicated data file.
-import { classData, chapterData } from '../data/lessons-data.js';
+import { classData, chapterData } from '../data/videos-data.js';
 
 // --- STATE MANAGEMENT ---
 // Keep track of the user's current selection.
@@ -69,8 +69,8 @@ function showChapterSelection(classNumber) {
     DOMElements.chapterSelection.classList.remove('hidden');
     DOMElements.videoPlayer.classList.add('hidden');
     DOMElements.breadcrumb.classList.remove('hidden');
-    DOMElements.breadcrumbText.textContent = `Lessons / Class ${selectedClassNumber}`;
-    DOMElements.chapterTitle.textContent = `Class ${selectedClassNumber} - Choose a Lesson`;
+    DOMElements.breadcrumbText.textContent = `Videos / Class ${selectedClassNumber}`;
+    DOMElements.chapterTitle.textContent = `Class ${selectedClassNumber} - Choose a Video`;
     renderChapters(classNumber);
 }
 
@@ -113,7 +113,9 @@ function renderClasses() {
         'Hard': 'bg-red-100 text-red-800'
     };
     
-    DOMElements.classSelection.innerHTML = classData.map(classInfo => `
+    DOMElements.classSelection.innerHTML = classData.map(classInfo => {
+
+        return `
         <div class="card cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-card animate-slide-up relative ${classInfo.isComingSoon ? 'opacity-50 pointer-events-none' : ''}" 
              data-class-number="${classInfo.classNumber}">
             ${classInfo.isComingSoon ? `
@@ -133,12 +135,12 @@ function renderClasses() {
             <div class="card-content">
                 <div class="flex justify-between text-sm text-muted-foreground mb-4">
                     <span>📚 ${classInfo.chaptersCount} chapters</span>
-                    <span>🎯 ${classInfo.lessonsCount} lessons</span>
+                    <span>🎯 ${classInfo.videosCount} videos</span>
                 </div>
                 <button class="btn ${classInfo.isComingSoon ? 'btn-outline' : 'btn-primary'} w-full">${classInfo.isComingSoon ? 'Coming Soon' : 'Start Learning'}</button>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 }
 
 /**
@@ -183,17 +185,9 @@ function renderChapters(classNumber) {
                 ${
                     chapter.videoUrl
                     ? `<button data-action="watch-video" data-chapter-id="${chapter.id}" class="btn btn-primary w-full">
-                           ▶️ ${isCompleted ? 'Watch Again' : 'Watch Lesson'}
+                           ▶️ ${isCompleted ? 'Watch Again' : 'Watch Video'}
                        </button>`
                     : `<button class="btn btn-outline opacity-50 w-full" disabled>Video Coming Soon</button>`
-                }
-                
-                ${
-                    chapter.notesUrl
-                    ? `<a href="${chapter.notesUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary w-full">
-                           📄 View Notes
-                       </a>`
-                    : '' // Render nothing if no notes URL is present
                 }
             </div>
         </div>
@@ -228,7 +222,7 @@ function handleClassCardClick(e) {
 function handleChapterCardClick(e) {
     const watchButton = e.target.closest('button[data-action="watch-video"]');
     
-    // Check if the "Watch Lesson" button was clicked
+    // Check if the "Watch Video" button was clicked
     if (watchButton) {
         const chapterId = watchButton.dataset.chapterId;
         if (chapterId) {

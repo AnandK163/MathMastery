@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Games - MathLearn</title>
+    <title>Notes - MathLearn</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <!-- The store must be loaded first so it's available to other scripts -->
     <script src="js/store.js"></script>
+    <!-- Navigation script handles updating the points display at the top -->
     <script src="js/navigation.js"></script>
 </head>
 <body class="min-h-screen bg-background text-foreground">
@@ -21,9 +23,9 @@
                     <div class="hidden md:flex items-center space-x-1">
                         <a href="index.html" class="nav-link">Home</a>
                         <a href="videos.html" class="nav-link">Videos</a>
-                        <a href="notes.html" class="nav-link">Notes</a>
+                        <a href="notes.html" class="nav-link active">Notes</a>
                         <a href="quizzes.html" class="nav-link">Quizzes</a>
-                        <a href="games.html" class="nav-link active">Games</a>
+                        <a href="games.html" class="nav-link">Games</a>
                         <a href="applications.html" class="nav-link">Applications</a>
                     </div>
                 </div>
@@ -49,7 +51,7 @@
         <a href="videos.html" class="mobile-nav-link"><span class="icon">▶️</span><span>Videos</span></a>
         <a href="notes.html" class="mobile-nav-link"><span class="icon">📚</span><span>Notes</span></a>
         <a href="quizzes.html" class="mobile-nav-link"><span class="icon">🧠</span><span>Quizzes</span></a>
-        <a href="games.html" class="mobile-nav-link active"><span class="icon">🎮</span><span>Games</span></a>
+        <a href="games.html" class="mobile-nav-link"><span class="icon">🎮</span><span>Games</span></a>
         <a href="applications.html" class="mobile-nav-link"><span class="icon">💡</span><span>Applications</span></a>
     </div>
 
@@ -58,38 +60,35 @@
         <!-- Header -->
         <div class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Interactive <span class=" bg-clip-text bg-gradient-accent">Games</span>
+                Math <span class="text-transparent bg-clip-text bg-gradient-primary">Notes</span>
             </h1>
             <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Sharpen your skills and have fun with these math-based games
+                Choose your class and access detailed notes for each chapter.
             </p>
         </div>
 
-        
-        <!-- Game Selection -->
-        <div id="game-selection" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Games will be populated by JavaScript -->
-        </div>
-
-        <!-- Game Player -->
-        <div id="game-player" class="hidden">
-            <button id="back-to-games" class="btn btn-outline mb-6">
-                ← Back to Games
+        <!-- Navigation Breadcrumb -->
+        <div id="breadcrumb" class="mb-8 hidden">
+            <button id="back-btn" class="btn btn-outline mb-4">
+                ← Back
             </button>
-            <div id="game-content">
-                <!-- Game content will be populated by JavaScript -->
+            <div class="text-sm text-muted-foreground" id="breadcrumb-text">
+                Notes
             </div>
         </div>
 
-        <!-- Instructions for adding new games (Updated) -->
-        <!-- <div class="mt-16 p-6 bg-muted/50 rounded-lg border border-dashed border-border">
-            <h3 class="text-lg font-semibold mb-2">🎮 How to Add New Games</h3>
-            <ol class="list-decimal list-inside text-muted-foreground text-sm space-y-2">
-                <li>Create a new logic file in <code>js/games/</code> (e.g., <code>new-game.js</code>). It must export an object with <code>render</code> and <code>init</code> methods.</li>
-                <li>Add the game's metadata (title, description, etc.) to the <code>games</code> array in <code>data/games-data.js</code>.</li>
-                <li>In <code>js/games.js</code>, import your new game module and add it to the <code>gameModules</code> map.</li>
-            </ol>
-        </div> -->
+        <!-- Class Selection -->
+        <div id="class-selection" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Classes will be populated by JavaScript -->
+        </div>
+
+        <!-- Chapter Selection -->
+        <div id="chapter-selection" class="hidden">
+            <h2 id="chapter-title" class="text-2xl font-bold mb-8"></h2>
+            <div id="chapters-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Chapters will be populated by JavaScript -->
+            </div>
+        </div>
     </main>
 
     <!-- =================================================================== -->
@@ -113,6 +112,7 @@
     <!-- =================================================================== -->
 
 
-    <script type="module" src="js/games.js"></script>
+    <!-- The main logic script, loaded as a module -->
+    <script type="module" src="js/notes.js"></script>
 </body>
 </html>

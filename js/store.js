@@ -116,6 +116,10 @@ class GameStore {
         this.notifyStateChange();
     }
 
+    getCompletedLessons(category) {
+        return this.state.completedLessons.filter(id => id.startsWith(category));
+    }
+
     // ADD THIS ENTIRE NEW METHOD
 
     /**
