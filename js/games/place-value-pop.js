@@ -2,7 +2,7 @@
 const GAME_DURATION = 60; // seconds
 const BALLOON_COUNT = 10;
 const MIN_CORRECT_BALLOONS = 3; // Ensure at least this many correct balloons per round
-const POINTS_PER_CORRECT = 5;
+const POINTS_PER_CORRECT = 25;
 const PENALTY_PER_INCORRECT = 5;
 
 // --- GAME STATE VARIABLES ---

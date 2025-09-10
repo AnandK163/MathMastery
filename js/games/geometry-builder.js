@@ -1,331 +1,264 @@
 // js/games/geometry-builder.js
 
-const POINTS_PER_DISCOVERY = 50; // Points for discovering a new shape
+const POINTS_PER_DISCOVERY = 25;
 
-// --- Shape templates and data ---
 const shapesData = {
-    triangle: {
-        emoji: '🔺',
-        name: 'Triangle',
-        properties: 'A polygon with 3 sides and 3 angles totaling 180°.',
-        template: [
-            { x: 0, y: 100 }, { x: 50, y: 0 }, { x: 100, y: 100 }, { x: 0, y: 100 }
-        ]
-    },
-    rectangle: {
-        emoji: '▬',
-        name: 'Rectangle',
-        properties: 'A 4-sided polygon with four 90° right angles.',
-        template: [
-            { x: 0, y: 0 }, { x: 100, y: 0 }, { x: 100, y: 100 }, { x: 0, y: 100 }, { x: 0, y: 0 }
-        ]
-    },
-    circle: {
-        emoji: '⭕',
-        name: 'Circle',
-        properties: 'A round shape where all points are equidistant from the center.',
-        template: Array.from({ length: 64 }, (_, i) => {
-            const angle = (i / 64) * 2 * Math.PI;
-            return { x: 50 + 50 * Math.cos(angle), y: 50 + 50 * Math.sin(angle) };
-        })
-    }
+    triangle: { emoji: '🔺', name: 'Triangle', properties: 'A polygon with 3 sides. The sum of its interior angles is 180°.' },
+    quadrilateral: { emoji: '◇', name: 'Quadrilateral', properties: 'A polygon with 4 sides. The sum of its interior angles is 360°.' },
+    rectangle: { emoji: '▬', name: 'Rectangle', properties: 'A special quadrilateral where all four interior angles are right angles (90°).' },
+    pentagon: { emoji: '⬠', name: 'Pentagon', properties: 'A polygon with 5 sides. The sum of its interior angles is 540°.' },
+    hexagon: { emoji: '⬡', name: 'Hexagon', properties: 'A polygon with 6 sides. The sum of its interior angles is 720°.' },
 };
 
-// --- Module-level variables for the game session ---
-let canvas, ctx;
-let isDrawing = false;
-let userPath = []; // Stores the {x, y} coordinates of the user's drawing
-let discoveredShapes = new Set();
-let currentGameState = null;
-let preprocessedTemplates = {}; // Store processed templates for efficiency
+// --- Module-level variables ---
+let canvas, ctx, currentGameState, discoveredShapes, currentPath, dots;
+let onScoreUpdate; // Callback to update the global score in real-time
+const DOT_RADIUS = 5, GRID_SPACING = 50;
 
-// =================================================================
-// --- $1 UNISTROKE RECOGNIZER IMPLEMENTATION (Simplified) ---
-// =================================================================
+// --- Geometric Analysis Algorithms ---
 
-const NUM_RESAMPLE_POINTS = 64; // Standard number of points to resample to
+function checkCollinearity(p, q, r) {
+    const crossProduct = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+    return Math.abs(crossProduct) < 1e-9;
+}
 
-/**
- * Main recognition function. Compares a user's path against pre-defined templates.
- * @param {Array} points - The user's drawn path.
- * @returns {object|null} - The best match with a score, or null.
- */
-function recognize(points) {
-    if (points.length < 10) return null; // Path too short
+function checkLineIntersection(p1, q1, p2, q2) {
+    function orientation(p, q, r) {
+        const val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+        if (Math.abs(val) < 1e-9) return 0;
+        return (val > 0) ? 1 : 2;
+    }
+    function onSegment(p, q, r) {
+        return (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) &&
+                q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y));
+    }
+    const o1 = orientation(p1, q1, p2), o2 = orientation(p1, q1, q2),
+          o3 = orientation(p2, q2, p1), o4 = orientation(p2, q2, q1);
+    if (o1 !== o2 && o3 !== o4) return true;
+    if (o1 === 0 && onSegment(p1, p2, q1)) return true;
+    if (o2 === 0 && onSegment(p1, q2, q1)) return true;
+    if (o3 === 0 && onSegment(p2, p1, q2)) return true;
+    if (o4 === 0 && onSegment(p2, q1, q2)) return true;
+    return false;
+}
 
-    const processedPoints = processPath(points);
-    let bestDistance = Infinity;
-    let bestMatch = null;
-
-    // Compare against each preprocessed template
-    for (const shapeName in preprocessedTemplates) {
-        const templatePoints = preprocessedTemplates[shapeName];
-        // Search for the best rotational alignment
-        const distance = distanceAtBestAngle(processedPoints, templatePoints, -Math.PI / 2, Math.PI / 2);
-        
-        if (distance < bestDistance) {
-            bestDistance = distance;
-            bestMatch = shapeName;
+function isSimplePolygon(path) {
+    const n = path.length;
+    if (n <= 3) return true;
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 2; j < n; j++) {
+            if (i === 0 && j === n - 1) continue;
+            if (checkLineIntersection(path[i], path[(i + 1) % n], path[j], path[(j + 1) % n])) return false;
         }
     }
-    
-    // The score is an inverse of the distance. Closer to 1 is a better match.
-    const score = 1 - (bestDistance / (0.5 * Math.sqrt(2 * 250 * 250)));
-    return { name: bestMatch, score: score };
+    return true;
 }
 
-/**
- * Normalizes a path by resampling, scaling, and translating it to origin.
- * @param {Array} points - An array of {x,y} points.
- * @returns {Array} The normalized path.
- */
-function processPath(points) {
-    let resampled = resample(points, NUM_RESAMPLE_POINTS);
-    const indicativeAngle = Math.atan2(resampled[0].y, resampled[0].x);
-    let rotated = rotateBy(resampled, -indicativeAngle);
-    let scaled = scaleTo(rotated, 250);
-    return translateTo(scaled, { x: 0, y: 0 });
+function isRectangle(path) {
+    if (path.length !== 4) return false;
+    for (let i = 0; i < 4; i++) {
+        const p_prev = path[(i + 3) % 4], p_curr = path[i], p_next = path[(i + 1) % 4];
+        const v1 = { x: p_prev.x - p_curr.x, y: p_prev.y - p_curr.y },
+              v2 = { x: p_next.x - p_curr.x, y: p_next.y - p_curr.y };
+        if (Math.abs(v1.x * v2.x + v1.y * v2.y) > 1e-5) return false;
+    }
+    return true;
 }
 
-function resample(points, n) {
-    const I = pathLength(points) / (n - 1);
-    let D = 0.0;
-    let newPoints = [points[0]];
-    for (let i = 1; i < points.length; i++) {
-        const d = distance(points[i - 1], points[i]);
-        if ((D + d) >= I) {
-            const qx = points[i - 1].x + ((I - D) / d) * (points[i].x - points[i - 1].x);
-            const qy = points[i - 1].y + ((I - D) / d) * (points[i].y - points[i - 1].y);
-            const newPoint = { x: qx, y: qy };
-            newPoints.push(newPoint);
-            points.splice(i, 0, newPoint);
-            D = 0.0;
+// --- Main Game Logic ---
+
+function handleCanvasClick(event) {
+    const rect = canvas.getBoundingClientRect();
+    const clickPos = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+    let closestDot = null, minDistance = Infinity;
+    dots.forEach(dot => {
+        const d = Math.hypot(dot.x - clickPos.x, dot.y - clickPos.y);
+        if (d < minDistance && d < GRID_SPACING / 2) {
+            minDistance = d;
+            closestDot = dot;
+        }
+    });
+
+    if (!closestDot) return;
+    if (currentPath.length > 0 && closestDot === currentPath[currentPath.length - 1]) return;
+
+    if (currentPath.length >= 3 && closestDot === currentPath[0]) {
+        recognizeAndProcessPolygon(currentPath);
+        currentPath = [];
+    } else if (currentPath.length >= 2) {
+        const lastPoint = currentPath[currentPath.length - 1], secondLastPoint = currentPath[currentPath.length - 2];
+        if (checkCollinearity(secondLastPoint, lastPoint, closestDot)) {
+            currentPath[currentPath.length - 1] = closestDot;
         } else {
-            D += d;
+            currentPath.push(closestDot);
         }
+    } else {
+        currentPath.push(closestDot);
     }
-    if (newPoints.length === n - 1) newPoints.push(points[points.length - 1]);
-    return newPoints;
+    drawCanvas();
 }
 
-function scaleTo(points, size) {
-    const B = boundingBox(points);
-    const scale = size / Math.max(B.width, B.height);
-    return points.map(p => ({ x: p.x * scale, y: p.y * scale }));
-}
-
-function translateTo(points, origin) {
-    const c = centroid(points);
-    return points.map(p => ({
-        x: p.x - c.x + origin.x,
-        y: p.y - c.y + origin.y
-    }));
-}
-
-function rotateBy(points, angle) {
-    const c = centroid(points);
-    const cos = Math.cos(angle);
-    const sin = Math.sin(angle);
-    return points.map(p => ({
-        x: (p.x - c.x) * cos - (p.y - c.y) * sin + c.x,
-        y: (p.x - c.x) * sin + (p.y - c.y) * cos + c.y
-    }));
-}
-
-/**
- * Calculates the "golden section search" for the best rotation angle.
- * @param {Array} points - The user's points
- * @param {Array} template - The template points
- * @param {number} a - Start angle range
- * @param {number} b - End angle range
- */
-function distanceAtBestAngle(points, template, a, b) {
-    // --- FIX: Declared these variables with `let` instead of `const` ---
-    let x1, f1, x2, f2;
-
-    const phi = 0.5 * (-1.0 + Math.sqrt(5.0));
-    const anglePrecision = 0.02; // ~1 degree
-
-    x1 = phi * a + (1.0 - phi) * b;
-    f1 = distanceAtAngle(points, template, x1);
-    x2 = (1.0 - phi) * a + phi * b;
-    f2 = distanceAtAngle(points, template, x2);
-
-    while (Math.abs(b - a) > anglePrecision) {
-        if (f1 < f2) {
-            b = x2; x2 = x1; f2 = f1;
-            x1 = phi * a + (1.0 - phi) * b;
-            f1 = distanceAtAngle(points, template, x1);
-        } else {
-            a = x1; x1 = x2; f1 = f2;
-            x2 = (1.0 - phi) * a + phi * b;
-            f2 = distanceAtAngle(points, template, x2);
-        }
-    }
-    return Math.min(f1, f2);
-}
-
-function distanceAtAngle(points, template, angle) {
-    return pathDistance(rotateBy(points, angle), template);
-}
-
-// --- Helper geometric functions ---
-const distance = (p1, p2) => Math.hypot(p1.x - p2.x, p1.y - p2.y);
-const pathLength = (points) => points.reduce((d, p, i) => i > 0 ? d + distance(p, points[i - 1]) : 0, 0);
-const pathDistance = (path1, path2) => path1.reduce((d, p, i) => d + distance(p, path2[i]), 0) / path1.length;
-const centroid = (points) => ({ x: points.reduce((sum, p) => sum + p.x, 0) / points.length, y: points.reduce((sum, p) => sum + p.y, 0) / points.length });
-const boundingBox = (points) => {
-    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (const p of points) {
-        minX = Math.min(minX, p.x);
-        maxX = Math.max(maxX, p.x);
-        minY = Math.min(minY, p.y);
-        maxY = Math.max(maxY, p.y);
-    }
-    return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
-};
-// =================================================================
-// --- END OF RECOGNIZER IMPLEMENTATION ---
-// =================================================================
-
-
-// --- Drawing and Game Logic ---
-
-function startDrawing(event) {
-    event.preventDefault();
-    clearCanvas(false);
-    isDrawing = true;
-    userPath = [getCanvasCoordinates(event)];
-    ctx.beginPath();
-    ctx.moveTo(userPath[0].x, userPath[0].y);
-}
-
-function draw(event) {
-    if (!isDrawing) return;
-    event.preventDefault();
-    const point = getCanvasCoordinates(event);
-    userPath.push(point);
-    ctx.lineTo(point.x, point.y);
-    ctx.stroke();
-}
-
-function stopDrawing() {
-    if (!isDrawing || userPath.length < 10) {
-        isDrawing = false;
-        return;
-    }
-    isDrawing = false;
-    
-    const result = recognize(userPath);
-    handleRecognitionResult(result);
-}
-
-function handleRecognitionResult(result) {
+function recognizeAndProcessPolygon(path) {
     const infoPanel = document.getElementById('shape-info');
-    if (!result || result.score < 0.82) { // Slightly increased threshold for better accuracy
-        infoPanel.innerHTML = `<div class="text-destructive font-semibold">Hmm, that's a tricky one. Try drawing the shape again more clearly!</div>`;
+    
+    // Check for self-intersection first
+    if (!isSimplePolygon(path)) {
+        infoPanel.innerHTML = `
+            <div class="text-center animate-pop-in">
+                <div class="text-2xl font-bold text-destructive">❌ Self-Intersecting!</div>
+                <p class="mt-2 text-sm">A simple polygon's edges cannot cross over each other. Please try again!</p>
+            </div>`;
+        infoPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
     }
+    
+    // If it's a simple polygon, identify it.
+    const vertexCount = path.length;
+    let shapeName = null;
+    switch (vertexCount) {
+        case 3: shapeName = 'triangle'; break;
+        case 4: shapeName = isRectangle(path) ? 'rectangle' : 'quadrilateral'; break;
+        case 5: shapeName = 'pentagon'; break;
+        case 6: shapeName = 'hexagon'; break;
+    }
 
-    const shapeName = result.name;
+    if (shapeName) {
+        displayRecognitionResult(shapeName);
+    } else {
+        const polygonName = getPolygonName(vertexCount);
+        infoPanel.innerHTML = `
+            <div class="text-center animate-pop-in">
+                <div class="text-2xl font-bold">✨ A ${polygonName}!</div>
+                <p class="mt-2 text-sm">That's a great shape! This game tracks discoveries up to hexagons.</p>
+            </div>`;
+        infoPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function getPolygonName(sides) {
+    const names = { 7: 'Heptagon', 8: 'Octagon', 9: 'Nonagon', 10: 'Decagon' };
+    return names[sides] || `${sides}-sided polygon`;
+}
+
+function displayRecognitionResult(shapeName) {
     const shape = shapesData[shapeName];
+    const infoPanel = document.getElementById('shape-info');
     infoPanel.innerHTML = `
         <div class="text-center animate-pop-in">
             <div class="text-6xl mb-2">${shape.emoji}</div>
-            <h4 class="text-xl font-bold text-primary">It's a ${shape.name}!</h4>
+            <h4 class="text-xl font-bold text-primary">You made a ${shape.name}!</h4>
             <p class="mt-2 text-sm">${shape.properties}</p>
-        </div>
-    `;
+        </div>`;
+
+    infoPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     if (!discoveredShapes.has(shapeName)) {
         discoveredShapes.add(shapeName);
         currentGameState.score += POINTS_PER_DISCOVERY;
         currentGameState.correctAnswers++;
         
+        if (onScoreUpdate) {
+            onScoreUpdate(POINTS_PER_DISCOVERY);
+        }
+        
         const discoveryList = document.getElementById('discovery-list');
         const li = document.createElement('li');
         li.className = 'flex items-center space-x-2 animate-pop-in';
         li.innerHTML = `<span class="text-2xl">${shape.emoji}</span><span>${shape.name}</span><span class="font-bold text-green-500 ml-auto">+${POINTS_PER_DISCOVERY}pts</span>`;
+        if (discoveryList.querySelector('.placeholder')) {
+            discoveryList.innerHTML = ''; // Clear placeholder text
+        }
         discoveryList.appendChild(li);
     }
 }
 
-function clearCanvas(clearAll = true) {
+// --- Canvas Drawing and UI Functions ---
+function setupDotGrid() {
+    dots = [];
+    const BORDER_MARGIN = 40;
+    for (let y = BORDER_MARGIN; y < canvas.height - BORDER_MARGIN / 2; y += GRID_SPACING) {
+        for (let x = BORDER_MARGIN; x < canvas.width - BORDER_MARGIN / 2; x += GRID_SPACING) {
+            dots.push({ x, y });
+        }
+    }
+    drawCanvas();
+}
+
+function drawCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if (clearAll) {
-        userPath = [];
-        document.getElementById('shape-info').innerHTML = '<span class="text-muted-foreground">Draw a shape in the box above!</span>';
+    ctx.fillStyle = '#dfe3e6';
+    dots.forEach(dot => {
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, Math.PI * 2);
+        ctx.fill();
+    });
+    if (currentPath.length > 0) {
+        ctx.strokeStyle = '#007bff', ctx.lineWidth = 4, ctx.beginPath(), ctx.moveTo(currentPath[0].x, currentPath[0].y);
+        for (let i = 1; i < currentPath.length; i++) ctx.lineTo(currentPath[i].x, currentPath[i].y);
+        ctx.stroke();
+        ctx.fillStyle = '#28a745', ctx.beginPath(), ctx.arc(currentPath[0].x, currentPath[0].y, DOT_RADIUS + 3, 0, Math.PI * 2), ctx.fill();
     }
 }
 
-function getCanvasCoordinates(event) {
-    const rect = canvas.getBoundingClientRect();
-    const touch = event.touches ? event.touches[0] : event;
-    return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+function clearCurrentPath() {
+    currentPath = [];
+    drawCanvas();
+    document.getElementById('shape-info').innerHTML = '<span class="text-muted-foreground">Click dots to create a new shape!</span>';
 }
 
 // --- Exported Game Object ---
-
 export const geometryBuilderGame = {
     render: () => {
         return `
             <div class="card max-w-4xl mx-auto">
                 <div class="card-header text-center">
                     <h2 class="text-3xl font-bold">Geometry Shape Builder</h2>
-                    <p class="text-muted-foreground mt-2">Draw a triangle, rectangle, or circle to discover it!</p>
+                    <p class="text-muted-foreground mt-2">Draw polygons by connecting the dots!</p>
                 </div>
-                <div class="card-content p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="md:col-span-2">
-                            <h3 class="text-lg font-semibold mb-4 text-center">Drawing Canvas</h3>
-                            <canvas id="geometry-canvas" class="w-full border-2 border-dashed border-primary rounded-lg cursor-crosshair bg-white" width="500" height="400"></canvas>
-                            <div class="mt-4 text-center">
-                                <button id="clear-canvas-btn" class="btn btn-destructive">Clear Drawing</button>
-                            </div>
+                <div class="card-content p-4 sm:p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        <div class="md:col-span-2 md:order-1">
+                            <canvas id="geometry-canvas" class="w-full border-2 border-dashed rounded-lg bg-white cursor-pointer" width="500" height="400" style="touch-action: none;"></canvas>
                         </div>
-                        <div class="md:col-span-1">
-                             <h3 class="text-lg font-semibold mb-4 text-center">Discoveries</h3>
-                             <ul id="discovery-list" class="space-y-3 bg-muted p-4 rounded-lg min-h-[150px]">
-                             </ul>
-                             <div class="mt-6">
-                                <h4 class="font-semibold mb-2 text-center">Shape Information:</h4>
-                                <div id="shape-info" class="p-4 rounded-lg min-h-[150px] flex items-center justify-center text-center">
-                                    <span class="text-muted-foreground">Draw a shape in the box!</span>
+                        <div class="md:col-span-1 md:order-2">
+                             <h3 class="text-lg font-semibold mb-2 text-center">Controls</h3>
+                             <div class="grid grid-cols-1 gap-2 mb-4">
+                                <button id="clear-canvas-btn" class="btn btn-destructive">Clear Current Shape</button>
+                             </div>
+                             <div class="mb-4">
+                                <h4 class="font-semibold mb-2 text-center">Shape Information</h4>
+                                <div id="shape-info" class="p-4 rounded-lg min-h-[120px] flex items-center justify-center text-center bg-blue-50 border border-blue-200">
+                                    <span class="text-muted-foreground">Click dots to begin. Click the first dot to close a shape.</span>
                                 </div>
                             </div>
+                            <h3 class="text-lg font-semibold mb-2 text-center">Discoveries</h3>
+                             <ul id="discovery-list" class="space-y-3 bg-muted p-4 rounded-lg min-h-[150px]">
+                                 <li class="text-sm text-muted-foreground placeholder">Discovered shapes will appear here...</li>
+                             </ul>
                         </div>
                     </div>
                 </div>
             </div>`;
     },
-    init: (gameState) => {
+    init: (gameState, endGameCallback, updateGlobalScore) => {
         currentGameState = gameState;
+        onScoreUpdate = updateGlobalScore;
         discoveredShapes = new Set();
+        currentPath = [];
+        dots = [];
         canvas = document.getElementById('geometry-canvas');
         if (!canvas) return;
         ctx = canvas.getContext('2d');
-        ctx.strokeStyle = '#333';
-        ctx.lineWidth = 5;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
         
-        for (const shapeName in shapesData) {
-            preprocessedTemplates[shapeName] = processPath(shapesData[shapeName].template);
-        }
-
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('mouseleave', stopDrawing);
-        canvas.addEventListener('touchstart', startDrawing, { passive: false });
-        canvas.addEventListener('touchmove', draw, { passive: false });
-        canvas.addEventListener('touchend', stopDrawing);
-        
-        document.getElementById('clear-canvas-btn').addEventListener('click', () => clearCanvas(true));
+        setupDotGrid();
+        canvas.addEventListener('click', handleCanvasClick);
+        document.getElementById('clear-canvas-btn').addEventListener('click', clearCurrentPath);
     },
     cleanup: () => {
         currentGameState = null;
-        userPath = [];
-        preprocessedTemplates = {};
+        onScoreUpdate = null;
+        dots = [];
+        currentPath = [];
+        discoveredShapes = new Set();
     }
 };

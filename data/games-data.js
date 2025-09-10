@@ -1,6 +1,12 @@
 // data/games-data.js
 
+/**
+ * Defines the metadata for all available games, including the points
+ * required to unlock them. The progression is designed to build from
+ * foundational skills to more complex applications.
+ */
 export const games = [
+    // --- Unlocked at Start (0 Points) ---
     {
         id: 'arithmetic-speed',
         title: 'Arithmetic Speed Challenge',
@@ -11,22 +17,13 @@ export const games = [
         requiredPoints: 0
     },
     {
-        id: 'equation-solver',
-        title: 'Equation Solver Puzzle',
-        description: 'Find the missing values in equations',
-        icon: '🧩',
-        difficulty: 'Medium',
-        category: 'Algebra',
-        requiredPoints: 50
-    },
-    {
-        id: 'geometry-builder',
-        title: 'Geometry Shape Builder',
-        description: 'Create shapes and learn their properties',
-        icon: '📐',
-        difficulty: 'Medium',
-        category: 'Geometry',
-        requiredPoints: 100
+        id: 'place-value-pop',
+        title: 'Place Value Pop',
+        description: 'Pop balloons that match the given place value (ones, tens, hundreds).',
+        icon: '🎈',
+        difficulty: 'Easy',
+        category: 'Number Sense',
+        requiredPoints: 0
     },
     {
         id: 'fraction-match',
@@ -35,16 +32,6 @@ export const games = [
         icon: '🎯',
         difficulty: 'Easy',
         category: 'Fractions',
-        requiredPoints: 2000
-    }
-,
-    {
-        id: 'place-value-pop',
-        title: 'Place Value Pop',
-        description: 'Pop balloons that match the given place value (ones, tens, hundreds).',
-        icon: '🎈',
-        difficulty: 'Easy',
-        category: 'Number Sense',
         requiredPoints: 0
     },
     {
@@ -56,6 +43,8 @@ export const games = [
         category: 'Data Interpretation',
         requiredPoints: 0
     },
+
+    // --- First Tier Unlock (Requires Foundational Skills) ---
     {
         id: 'multiplication-grid-attack',
         title: 'Multiplication Grid Attack',
@@ -63,6 +52,38 @@ export const games = [
         icon: '✖️',
         difficulty: 'Medium',
         category: 'Multiplication',
-        requiredPoints: 0
+        requiredPoints: 250
+    },
+    
+    // --- Mid Tier Unlock (Introduces Algebra) ---
+    {
+        id: 'equation-solver',
+        title: 'Equation Solver Puzzle',
+        description: 'Find the missing values in equations.',
+        icon: '🧩',
+        difficulty: 'Medium',
+        category: 'Algebra',
+        requiredPoints: 600
+    },
+
+    // --- Equation Builder (Algebra/Medium, unlocked with Equation Solver) ---
+    {
+        id: 'equation-builder',
+        title: 'Equation Builder',
+        description: 'Form equations using numbers & operators to match the target number!',
+        icon: '🧮',
+        difficulty: 'Medium',
+        category: 'Algebra',
+        requiredPoints: 800
+    },
+    // --- Final Unlock (Unique Gameplay) ---
+    {
+        id: 'geometry-builder',
+        title: 'Geometry Shape Builder',
+        description: 'Create shapes and learn their properties.',
+        icon: '📐',
+        difficulty: 'Medium',
+        category: 'Geometry',
+        requiredPoints: 1000
     }
 ];

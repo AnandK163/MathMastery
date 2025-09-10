@@ -134,7 +134,7 @@ function renderClasses() {
             
             <div class="card-content">
                 <div class="flex justify-between text-sm text-muted-foreground mb-4">
-                    <span>📚 ${classInfo.chaptersCount} chapters</span>
+                    <span>📚 ${chapterData[classInfo.classNumber]?.length || 0} chapters</span>
                     <span>🎯 ${classInfo.videosCount} videos</span>
                 </div>
                 <button class="btn ${classInfo.isComingSoon ? 'btn-outline' : 'btn-primary'} w-full">${classInfo.isComingSoon ? 'Coming Soon' : 'Start Learning'}</button>

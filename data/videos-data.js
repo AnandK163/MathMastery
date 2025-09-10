@@ -72,7 +72,7 @@ export const chapterData = {
             id: "ch1",
             title: "Real Numbers (Part 1)",
             description: "Understanding the basics of real numbers and their properties.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/jKKpNc5hhNs",
             topics: ["Real Numbers"]
         },
@@ -80,7 +80,7 @@ export const chapterData = {
             id: "ch2",
             title: "Real Numbers (Part 2)",
             description: "Continuing with real numbers: divisions, HCF and LCM.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/fsS-39Nv17A",
             topics: ["Real Numbers"]
         },
@@ -88,7 +88,7 @@ export const chapterData = {
             id: "ch3",
             title: "Real Numbers (Part 3)",
             description: "Explore Euclid’s division lemma and applications.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/GJzohSJvlqw",
             topics: ["Real Numbers"]
         },
@@ -96,7 +96,7 @@ export const chapterData = {
             id: "ch4",
             title: "Real Numbers (Part 4)",
             description: "Learn more on irrational numbers and decimal expansions.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/YN9M3OGQPi0",
             topics: ["Real Numbers"]
         },
@@ -104,7 +104,7 @@ export const chapterData = {
             id: "ch5",
             title: "Real Numbers (Part 5)",
             description: "More examples and exercises on real numbers.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/nsXcOpKmbh8",
             topics: ["Real Numbers"]
         },
@@ -112,7 +112,7 @@ export const chapterData = {
             id: "ch6",
             title: "Real Numbers (Part 6)",
             description: "Wrapping up real numbers with key theorems and tricks.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/ohmeRsYLhXU",
             topics: ["Real Numbers"]
         },
@@ -120,7 +120,7 @@ export const chapterData = {
             id: "ch7",
             title: "Sets (Part 1)",
             description: "Introduction to sets, types, and representations.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/veiCFEMpJjg",
             topics: ["Sets"]
         },
@@ -128,7 +128,7 @@ export const chapterData = {
             id: "ch8",
             title: "Sets (Part 2)",
             description: "Understanding subsets, power sets, and Venn diagrams.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/WadiLeLj7HM",
             topics: ["Sets"]
         },
@@ -136,7 +136,7 @@ export const chapterData = {
             id: "ch9",
             title: "Sets (Part 3)",
             description: "Set operations: union, intersection, and complements.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/bA-8Z702Au0",
             topics: ["Sets"]
         },
@@ -144,7 +144,7 @@ export const chapterData = {
             id: "ch10",
             title: "Polynomials (Part 1)",
             description: "Introduction to polynomials and degrees.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/lfKUUHQbKs8",
             topics: ["Polynomials"]
         },
@@ -152,7 +152,7 @@ export const chapterData = {
             id: "ch11",
             title: "Polynomials (Part 2)",
             description: "Polynomial identities and factorization methods.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/8ETyfwUnDak",
             topics: ["Polynomials"]
         },
@@ -160,7 +160,7 @@ export const chapterData = {
             id: "ch12",
             title: "Polynomials (Part 3)",
             description: "More problems and applications of identities.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/5eMV95iA3cI",
             topics: ["Polynomials"]
         },
@@ -168,7 +168,7 @@ export const chapterData = {
             id: "ch13",
             title: "Polynomials (Part 4)",
             description: "Revision and summary of key polynomial concepts.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/5eMV95iA3cI",
             topics: ["Polynomials"]
         },
@@ -176,7 +176,7 @@ export const chapterData = {
             id: "ch14",
             title: "Coordinate Geometry (Part 1)",
             description: "Basics of coordinate geometry and plotting points.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/Mfd9PbUUiCM",
             topics: ["Coordinate Geometry"]
         },
@@ -184,7 +184,7 @@ export const chapterData = {
             id: "ch15",
             title: "Coordinate Geometry (Part 2)",
             description: "Distance formula and section formula.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/2JLgHI1c1NQ",
             topics: ["Coordinate Geometry"]
         },
@@ -192,7 +192,7 @@ export const chapterData = {
             id: "ch16",
             title: "Similar Triangles (Part 1)",
             description: "Triangle similarity and basic theorems.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/OIYD98c_uUE",
             topics: ["Similar Triangles"]
         },
@@ -200,7 +200,7 @@ export const chapterData = {
             id: "ch17",
             title: "Similar Triangles (Part 2)",
             description: "Applying similarity criteria to solve problems.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/kAq0zCqMWvs",
             topics: ["Similar Triangles"]
         },
@@ -208,7 +208,7 @@ export const chapterData = {
             id: "ch18",
             title: "Similar Triangles (Part 3)",
             description: "Using similarity to find unknown lengths.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/VEYbsG57Lfk",
             topics: ["Similar Triangles"]
         },
@@ -216,7 +216,7 @@ export const chapterData = {
             id: "ch19",
             title: "Similar Triangles (Part 4)",
             description: "More problem-solving using triangle similarity.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/sNLhIfWtdlY",
             topics: ["Similar Triangles"]
         },
@@ -224,7 +224,7 @@ export const chapterData = {
             id: "ch20",
             title: "Similar Triangles (Part 5)",
             description: "Exercise 8.2 deep dive and concept applications.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/raC2aiw-7Ms",
             topics: ["Similar Triangles", "Exercise 8.2"]
         },
@@ -232,7 +232,7 @@ export const chapterData = {
             id: "ch21",
             title: "Trigonometry (Part 1)",
             description: "Introduction to trigonometric ratios and angles.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/InjU9ZJ1KbQ",
             topics: ["Trigonometry"]
         },
@@ -240,7 +240,7 @@ export const chapterData = {
             id: "ch22",
             title: "Trigonometry (Part 2)",
             description: "Trigonometric identities and their proofs.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/X4LbV0WUW68",
             topics: ["Trigonometry"]
         },
@@ -248,7 +248,7 @@ export const chapterData = {
             id: "ch23",
             title: "Trigonometry (Part 3)",
             description: "Problem solving using trigonometric identities.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/A5BdFlgPUr8",
             topics: ["Trigonometry"]
         },
@@ -256,7 +256,7 @@ export const chapterData = {
             id: "ch24",
             title: "Trigonometry (Part 4)",
             description: "Applications of trigonometry in real life.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/EQGQ4_ja-NI",
             topics: ["Trigonometry"]
         }
@@ -266,7 +266,7 @@ export const chapterData = {
             id: "ch1",
             title: "Real Numbers - Part 1",
             description: "Introduction to real numbers and number systems.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/Y-n13twxdcs",
             topics: ["Real Numbers", "Number Line"]
         },
@@ -274,7 +274,7 @@ export const chapterData = {
             id: "ch2",
             title: "Real Numbers - Part 2",
             description: "Exploring properties and classifications of real numbers.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/EsYwsjOzw_o",
             topics: ["Properties", "Irrational Numbers"]
         },
@@ -282,7 +282,7 @@ export const chapterData = {
             id: "ch3",
             title: "Real Numbers - Part 3",
             description: "Understanding rational and irrational numbers with examples.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/zXN9hdeKrxI",
             topics: ["Rational Numbers", "Irrational Numbers"]
         },
@@ -290,7 +290,7 @@ export const chapterData = {
             id: "ch4",
             title: "Real Numbers - Part 4",
             description: "Problems and concepts related to real numbers.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/64uiYXjhPb0",
             topics: ["Applications", "Examples"]
         },
@@ -298,7 +298,7 @@ export const chapterData = {
             id: "ch5",
             title: "Real Numbers - Part 5",
             description: "Review and advanced problem-solving on real numbers.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/xRCrej4wtAk",
             topics: ["Problem Solving", "Review"]
         },
@@ -306,7 +306,7 @@ export const chapterData = {
             id: "ch6",
             title: "Polynomials - Part 1",
             description: "Introduction to polynomials and their basic terms.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/Rx0LxxQTw1Q",
             topics: ["Terms", "Degree", "Coefficients"]
         },
@@ -314,7 +314,7 @@ export const chapterData = {
             id: "ch7",
             title: "Polynomials - Part 2",
             description: "Addition and subtraction of polynomials.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/-QHxeK7mf_0",
             topics: ["Addition", "Subtraction"]
         },
@@ -322,7 +322,7 @@ export const chapterData = {
             id: "ch8",
             title: "Polynomials - Part 3",
             description: "Polynomial division and factorization.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/mikVsxr9iAI",
             topics: ["Division", "Factorization"]
         },
@@ -330,72 +330,34 @@ export const chapterData = {
             id: "ch9",
             title: "Polynomials - Part 4",
             description: "Special identities and problems on polynomials.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/cbM9j6TCPvE",
             topics: ["Identities", "Problem Solving"]
         },
-        
         {
             id: "ch10",
-            title: "Co-ordinate Geometry",
-            description: "Understand the Cartesian plane and how to plot points.",
-            points: 10,
-            videoUrl: null, // No video, will show "Coming Soon"
-            notesUrl: "https://drive.google.com/file/d/1gw2tVZzC6oMV6kn_kx-2rS5GRF6woZPk/view?usp=drive_link",
-            topics: ["Cartesian System", "Plotting Points", "Quadrants"]
+            title: "Geometry Basics",
+            description: "Introduction to lines and angles.",
+            points: 50,
+            videoUrl: "https://youtu.be/ncg2GSxYxZw?si=REK_jLIlx61N1j39",
+            topics: ["Lines", "Angles"]
         },
         {
-            id: "ch11",
-            title: "Quadrilaterals",
-            description: "Explore the properties of different types of quadrilaterals.",
-            points: 15,
-            videoUrl: null,
-            notesUrl: "https://drive.google.com/file/d/1k5K5AqG8FJHAZKiOA23Ng0UpB2mWYrUF/view?usp=drive_link",
-            topics: ["Parallelogram", "Rhombus", "Trapezium", "Properties"]
-        },
-        {
-            id: "ch12",
-            title: "Areas of Parallelograms & Triangles",
-            description: "Learn theorems related to the areas of parallelograms and triangles.",
-            points: 15,
-            videoUrl: null,
-            notesUrl: "https://drive.google.com/file/d/131sDzLC8OsROygsJ1eE5jrudFkavleZQ/view?usp=drive_link",
-            topics: ["Figures on Same Base", "Area Theorems", "Calculations"]
-        },
-        {
-            id: "ch13",
-            title: "Circles",
-            description: "A comprehensive look at circles and their related terms and theorems.",
-            points: 20,
-            videoUrl: null,
-            notesUrl: "https://drive.google.com/file/d/1r39qNIIovhm1pu8UM3QrxntfDRymtbBa/view?usp=drive_link",
-            topics: ["Chords", "Arcs", "Cyclic Quadrilaterals", "Tangents"]
-        },
-        {
-            id: "ch14",
-            title: "Triangles",
-            description: "A deep dive into the properties and congruence of triangles.",
-            points: 20,
-            videoUrl: null,
-            notesUrl: "https://drive.google.com/file/d/1N2A5FzO6hGDzZyv-FUz3O4aI3ZE5lMTz/view?usp=drive_link",
-            topics: ["Congruence Rules", "Inequalities in a Triangle", "Properties"]
-        },
-        {
-            id: "ch15",
-            title: "Similar Triangles (Exercise 8.2)",
-            description: "Work through Exercise 8.2 on similar triangles with video and notes.",
-            points: 25,
-            videoUrl: null,
-            notesUrl: "https://drive.google.com/file/d/19npeZbKnEKgHHh-6OI16n0kmVH2woRvU/view?usp=drive_link",
-            topics: ["Similarity Criteria", "Problem Solving", "Exercise 8.2"]
+            "id": "ch11",
+            "title": "All About Lines and Angles",
+            "description": "10th class video covering adjacent angles and linear pair concepts.",
+            "points": 50,
+            "videoUrl": "https://www.youtube.com/embed/qj3oApN6GXo?si=3z44qjrxcnSqlVxq",
+            "topics": ["Lines", "Angles", "Adjacent Angles", "Linear Pair"]
         }
+
     ],
     8: [
         {
             id: "ch1",
             title: "Divisibility Rules",
             description: "Understand rules for divisibility by different numbers and how to apply them in problems.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/Xj-G2afaOxI",
             topics: ["Divisibility", "Number Properties", "Shortcuts"]
         },
@@ -403,7 +365,7 @@ export const chapterData = {
             id: "ch2",
             title: "Squares and Square Roots - Part 1",
             description: "Introduction to perfect squares and finding square roots.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/6lke7zDOP3k",
             topics: ["Squares", "Square Roots"]
         },
@@ -411,7 +373,7 @@ export const chapterData = {
             id: "ch3",
             title: "Squares and Square Roots - Part 2",
             description: "Methods to find square roots using factorization.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/T5pt2-weBzg",
             topics: ["Square Roots", "Factorization"]
         },
@@ -419,7 +381,7 @@ export const chapterData = {
             id: "ch4",
             title: "Squares and Square Roots - Part 3",
             description: "Solving word problems involving squares and square roots.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/q8VKPeLJSig",
             topics: ["Word Problems", "Applications"]
         },
@@ -427,7 +389,7 @@ export const chapterData = {
             id: "ch5",
             title: "Squares and Square Roots - Part 4",
             description: "Estimation methods and practice exercises.",
-            points: 10,
+            points: 50,
             videoUrl: "https://www.youtube.com/embed/_F63czEnwT4",
             topics: ["Estimation", "Practice"]
         }

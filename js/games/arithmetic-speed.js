@@ -37,7 +37,7 @@ const checkAnswer = () => {
     answerInput.disabled = true;
 
     if (userAnswer === state.currentProblem.answer) {
-        state.score += 5; // Reduced from 10 to 5
+        state.score += 25;
         state.correctAnswers++;
         feedbackEl.textContent = 'Correct! +10 points';
         feedbackEl.className = 'mt-4 text-center text-green-600 font-semibold';

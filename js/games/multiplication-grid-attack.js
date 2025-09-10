@@ -1,7 +1,7 @@
 // --- GAME CONFIGURATION ---
 const GAME_DURATION = 60; // seconds
 const GRID_SIZE = 5; // 5x5 grid
-const POINTS_PER_CORRECT = 20;
+const POINTS_PER_CORRECT = 25;
 const PENALTY_PER_INCORRECT = 10;
 
 // --- GAME STATE VARIABLES ---

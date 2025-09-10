@@ -40,7 +40,7 @@ const checkMatch = () => {
         card1.matched = true;
         card2.matched = true;
         state.matchedPairs++;
-        state.score += 10; // Reduced from 20 to 10
+        state.score += 25;
         state.correctAnswers++;
         
         firstCardEl.classList.add('correct');

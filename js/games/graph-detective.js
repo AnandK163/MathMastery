@@ -1,7 +1,7 @@
 // --- GAME CONFIGURATION ---
 const GAME_DURATION = 60; // seconds
-const POINTS_PER_CORRECT = 15;
-const PENALTY_PER_INCORRECT = 5;
+const POINTS_PER_CORRECT = 25;
+const PENALTY_PER_INCORRECT = 10;
 
 // --- GAME STATE VARIABLES ---
 let timerInterval;

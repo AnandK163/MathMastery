@@ -4,6 +4,7 @@ import { games } from '../data/games-data.js';
 // Import the logic for each game from their new, separate files
 import { arithmeticSpeedGame } from './games/arithmetic-speed.js';
 // (Assuming you create these other files in the same pattern)
+import { equationBuilderGame } from './games/equation-builder.js';
 import { equationSolverGame } from './games/equation-solver.js';
 import { geometryBuilderGame } from './games/geometry-builder.js';
 import { fractionMatchGame } from './games/fraction-match.js';
@@ -19,7 +20,8 @@ const gameModules = {
     'fraction-match': fractionMatchGame,
     'place-value-pop': placeValuePopGame,
     'graph-detective': graphDetectiveGame,
-    'multiplication-grid-attack': multiplicationGridAttackGame
+    'multiplication-grid-attack': multiplicationGridAttackGame,
+    'equation-builder': equationBuilderGame
 };
 
 let currentGame = null;
@@ -120,7 +122,7 @@ function startGame(gameId) {
     DOMElements.gameContent.innerHTML = gameModule.render(gameState);
     
     // 2. Initialize the game's event listeners
-    gameModule.init(gameState, endGame);
+    gameModule.init(gameState, endGame, window.gameStore.addPoints.bind(window.gameStore));
 }
 
 function endGame() {
