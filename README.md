@@ -1,73 +1,84 @@
-# Welcome to your Lovable project
+# MathMastery
 
-## Project info
+**MathMastery** is an interactive, front-end education platform created using HTML, CSS, and JavaScript. Aimed at students in classes 6 to 10, it brings math to life through engaging video lessons, comprehensive notes, quizzes, games, and real-world applications.
 
-**URL**: https://lovable.dev/projects/17ad8995-7a3b-4832-a76a-866220c4b473
+👉 Check it out live: [MathMastery Website](https://anandk163.github.io/MathMastery)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+##  What’s Inside
 
-**Use Lovable**
+- **Video Lessons** – Engaging tutorials to explain key math concepts.
+- **Downloadable Notes** – Concise summaries for quick revision.
+- **Quizzes** – Test your understanding and reinforce learning.
+- **Games** – Interactive challenges to make practice fun.
+- **Applications** – Discover practical ways math applies in everyday life.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/17ad8995-7a3b-4832-a76a-866220c4b473) and start prompting.
+These features are accessible via dedicated pages: 
+`videos.html`, `notes.html`, `quizzes.html`, `games.html`, `applications.html` alongside the core interface in `index.html`.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+##  Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **HTML5** – For structuring all web pages.
+- **CSS3** – To style and visually enhance the interface.
+- **Vanilla JavaScript** – For interactivity such as navigation, quizzes, and games.
+- **Static Hosting** – Served via GitHub Pages at [https://anandk163.github.io/MathMastery](https://anandk163.github.io/MathMastery)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+##  Setup & Usage
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Clone the Repository
+```bash
+git clone https://github.com/AnandK163/MathMastery.git
+cd MathMastery
+````
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### View Locally
 
-# Step 3: Install the necessary dependencies.
-npm i
+Open `index.html` in your browser, or run a local HTTP server:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+# Python 3:
+python -m http.server
+
+# Node.js:
+npx http-server
 ```
 
-**Edit a file directly in GitHub**
+Then visit `http://localhost:8000` (or as indicated by the server) to explore the site.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## Structure Overview
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+│ index.html            # Main navigation hub
+├── videos.html         # Video lessons
+├── notes.html          # Study notes
+├── quizzes.html        # Interactive quizzes
+├── games.html          # Math-based games
+├── applications.html   # Real-world use cases
+├── css/                # Stylesheets for layout and appearance
+├── js/                 # JavaScript functionality (e.g., navigation, quiz logic)
+├── images/             # Visual assets used across the site
+└── data/               # Data files for quizzes or content (if applicable)
+```
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## Development & Contributions
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+* **Contribute**: Feel free to fork the repo, make enhancements, and submit pull requests—whether it’s new quizzes, UI improvements, or additional content.
+* **Report Issues**: Use GitHub Issues to log any bugs, ideas, or feature requests.
+* **Keep it Structured**: Try maintaining the current architecture: separate HTML, CSS, JS, and assets to keep the project tidy and scalable.
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/17ad8995-7a3b-4832-a76a-866220c4b473) and click on Share -> Publish.
+## Contact & Acknowledgments
 
-## Can I connect a custom domain to my Lovable project?
+Built with enthusiasm by **Anand Kotichintala**, a passionate math educator with decades of teaching experience. His aim? To spark learning through interactivity and play.
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+For feedback or questions, connect via email: `zphstphd@gmail.com`.
